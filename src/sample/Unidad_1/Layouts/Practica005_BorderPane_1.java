@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class Practica004_BorderPane_1 extends Application {
+public class Practica005_BorderPane_1 extends Application {
     public static void main(String[] args) {
         launch(args);
     }
