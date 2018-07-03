@@ -1,10 +1,9 @@
-package sample.Unidad_1.Layouts;
+package Unidad_1.Layouts;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 

@@ -1,17 +1,15 @@
-package sample.Unidad_1.Layouts;
+package Unidad_1.Layouts;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class Practica002_VBox_2 extends Application {
+public class Practica001_StackPane_1 extends Application {
     public static void main(String[] args) {
         launch(args);
     }
@@ -23,16 +21,14 @@ public class Practica002_VBox_2 extends Application {
         Label etiqueta = new Label("Hola mundo");
         Rectangle rectangulo = new Rectangle(150,200, Color.AQUAMARINE);
 
-        VBox contenedor = new VBox(10);
-        contenedor.setPadding(new Insets(10));
-        contenedor.setAlignment(Pos.CENTER);
+        StackPane contenedor = new StackPane();
         contenedor.getChildren().add(boton);
         contenedor.getChildren().add(rectangulo);
         contenedor.getChildren().add(etiqueta);
 
 
 
-        Scene escena = new Scene(contenedor);
+        Scene escena = new Scene(contenedor,200, 300);
         escenarioPrincipal.setScene(escena);
         escenarioPrincipal.show();
     }
