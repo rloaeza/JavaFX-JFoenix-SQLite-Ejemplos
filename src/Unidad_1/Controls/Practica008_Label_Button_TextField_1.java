@@ -47,6 +47,9 @@ public class Practica008_Label_Button_TextField_1 extends Application implements
 
 
         Button botonSumar = new Button("Sumar");
+        botonSumar.setMaxWidth(Double.MAX_VALUE);
+
+
         Button botonRestar = new Button("Restar");
         botonLimpiar = new Button("Limpiar resultado");
 
@@ -55,7 +58,7 @@ public class Practica008_Label_Button_TextField_1 extends Application implements
         contenedor.add(labelValor1, 0,1);   contenedor.add(textFieldValor1, 1,1);
         contenedor.add(labelValor2, 0,2);   contenedor.add(textFieldValor2, 1, 2);
 
-        contenedor.add(botonSumar, 1,3);
+        contenedor.add(botonSumar, 1,3, 2,1);
         contenedor.add(botonRestar, 1,4);
         contenedor.add(botonLimpiar, 1,5);
 
