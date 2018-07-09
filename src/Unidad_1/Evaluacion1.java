@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.nio.DoubleBuffer;
+
 public class Evaluacion1 extends Application {
     private double n1;
     private double n2;
@@ -110,6 +112,52 @@ public class Evaluacion1 extends Application {
         b9.setOnAction(e -> agregarValor("9", resultado) );
         b0.setOnAction(e -> agregarValor("0", resultado) );
 
+
+        bMas.setOnAction(e-> {
+            opc = '+';
+            n1 = Double.valueOf(resultado.getText());
+            resultado.setText("0");
+
+        });
+
+
+        bIgual.setOnAction(e-> {
+            switch(opc) {
+                case '+':
+                    n2 = Double.valueOf(resultado.getText());
+                    nr = n1 + n2;
+                    resultado.setText(String.valueOf(nr));
+                    break;
+            }
+
+        });
+
+        Scene escena = new Scene(layout);
+        primaryStage.setScene(escena);
+        primaryStage.show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
         bLimpiar.setOnAction(e-> resultado.setText("0"));
         bLipmiarTodo.setOnAction(e-> {
             resultado.setText("0");
@@ -160,10 +208,8 @@ public class Evaluacion1 extends Application {
             else
                 resultado.setText(String.valueOf(nr));
         });
+*/
 
-        Scene escena = new Scene(layout);
-        primaryStage.setScene(escena);
-        primaryStage.show();
     }
 
     private void fijarOperador(char oper, TextField r) {
