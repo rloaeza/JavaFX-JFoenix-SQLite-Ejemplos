@@ -9,8 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 
 public class Pregunton extends Application {
@@ -88,7 +86,7 @@ public class Pregunton extends Application {
 
         siguiente.setOnAction(e-> {
             if(indicePreguntaActual== preguntas.size()-1)
-                return;
+                indicePreguntaActual=-1;
 
             indicePreguntaActual++;
             resultado.setText("");
@@ -98,7 +96,7 @@ public class Pregunton extends Application {
 
         anterior.setOnAction(e-> {
             if(indicePreguntaActual== 0)
-                return;
+                indicePreguntaActual=preguntas.size();
             indicePreguntaActual--;
             resultado.setText("");
             mostrarPregunta(pregunta, respuestas, respuestaCorrecta);
@@ -135,16 +133,16 @@ public class Pregunton extends Application {
         indicePreguntaActual = 0;
         preguntas = new ArrayList<Pregunta>();
         preguntas.add(
-                new Pregunta("¿Cuánto es 1 +1?",
+                new Pregunta("1. ¿Cuánto es 1 +1?",
                         new String[] {"1", "2", "3", "4"},
                         1));
         preguntas.add(
-                new Pregunta("¿Cuántos planetas tiene nuestro sistema solar",
+                new Pregunta("2. ¿Cuántos planetas tiene nuestro sistema solar",
                         new String[] {"10", "2", "3", "8", "11"},
                         3));
 
         preguntas.add(
-                new Pregunta("¿Cuántos satelites naturales tiene el planeta tierra?",
+                new Pregunta("3. ¿Cuántos satelites naturales tiene el planeta tierra?",
                         new String[] {"10", "2", "3", "8", "1"},
                         4));
     }
