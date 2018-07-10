@@ -1,3 +1,5 @@
+package Unidad_1.Controls;
+
 public class Pregunta {
     private String pregunta;
     private String[] respuestas;

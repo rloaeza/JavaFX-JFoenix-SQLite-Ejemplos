@@ -1,4 +1,4 @@
-package Unidad_1;
+package Unidad_1.Layouts;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;

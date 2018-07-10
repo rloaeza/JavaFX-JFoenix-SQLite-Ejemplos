@@ -1,3 +1,6 @@
+package Unidad_1.Controls;
+
+import Unidad_1.Controls.Pregunta;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
