@@ -72,21 +72,7 @@ public class Pregunton extends Application {
 
 
         cargarPreguntas();
-
-        pregunta.setText(preguntas.get(indicePreguntaActual).getPregunta());
-
-        respuestas.getItems().clear();
-
-
-        for(String r : preguntas.get(indicePreguntaActual).getRespuestas()) {
-            respuestas.getItems().add(r);
-        }
-
-        respuestaCorrecta.setText(preguntas.get(indicePreguntaActual)
-                .getRespuestas()[preguntas.get(indicePreguntaActual)
-                .getIndiceCorrecto()]);
-
-
+        mostrarPregunta(pregunta, respuestas, respuestaCorrecta);
 
         respuestas.setOnAction(e -> {
             if(respuestas.getSelectionModel().getSelectedIndex() ==
@@ -106,22 +92,7 @@ public class Pregunton extends Application {
             resultado.setText("");
             indicePreguntaActual++;
 
-
-
-            pregunta.setText(preguntas.get(indicePreguntaActual).getPregunta());
-
-            respuestas.getItems().clear();
-
-
-            for(String r : preguntas.get(indicePreguntaActual).getRespuestas()) {
-                respuestas.getItems().add(r);
-            }
-
-            respuestaCorrecta.setText(preguntas.get(indicePreguntaActual)
-                    .getRespuestas()[preguntas.get(indicePreguntaActual)
-                    .getIndiceCorrecto()]);
-
-
+            mostrarPregunta(pregunta, respuestas, respuestaCorrecta);
         });
 
 
@@ -129,21 +100,8 @@ public class Pregunton extends Application {
             if(indicePreguntaActual== 0)
                 return;
             indicePreguntaActual--;
-
-        resultado.setText("");
-
-            pregunta.setText(preguntas.get(indicePreguntaActual).getPregunta());
-
-            respuestas.getItems().clear();
-
-
-            for(String r : preguntas.get(indicePreguntaActual).getRespuestas()) {
-                respuestas.getItems().add(r);
-            }
-
-            respuestaCorrecta.setText(preguntas.get(indicePreguntaActual)
-                    .getRespuestas()[preguntas.get(indicePreguntaActual)
-                    .getIndiceCorrecto()]);
+            resultado.setText("");
+            mostrarPregunta(pregunta, respuestas, respuestaCorrecta);
 
 
         });
@@ -169,7 +127,21 @@ public class Pregunton extends Application {
 
     }
 
+    private void mostrarPregunta(Label pregunta, ComboBox respuestas, Label respuestaCorrecta) {
+        pregunta.setText(preguntas.get(indicePreguntaActual).getPregunta());
 
+        respuestas.getItems().clear();
+
+
+        for(String r : preguntas.get(indicePreguntaActual).getRespuestas()) {
+            respuestas.getItems().add(r);
+        }
+
+        respuestaCorrecta.setText(preguntas.get(indicePreguntaActual)
+                .getRespuestas()[preguntas.get(indicePreguntaActual)
+                .getIndiceCorrecto()]);
+
+    }
 
     private void cargarPreguntas() {
         indicePreguntaActual = 0;
