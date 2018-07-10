@@ -14,7 +14,7 @@ import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 
 public class Pregunton extends Application {
-    String txt = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s";
+
 
 
     private ArrayList<Pregunta> preguntas;
@@ -22,13 +22,13 @@ public class Pregunton extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Label pregunta = new Label(txt);
+        Label pregunta = new Label();
         ComboBox<String> respuestas = new ComboBox<String>();
         Label resultado = new Label("Correcto / Incorrecto");
         Button anterior= new Button("Anterior");
         Button siguiente = new Button("Siguiente");
         CheckBox mostrarRespuesta =new CheckBox("Mostrar respuesta correcta");
-        Label respuestaCorrecta=new Label(txt);
+        Label respuestaCorrecta=new Label();
 
         HBox layoutBotones = new HBox();
         layoutBotones.setSpacing(10);
@@ -89,9 +89,9 @@ public class Pregunton extends Application {
         siguiente.setOnAction(e-> {
             if(indicePreguntaActual== preguntas.size()-1)
                 return;
-            resultado.setText("");
-            indicePreguntaActual++;
 
+            indicePreguntaActual++;
+            resultado.setText("");
             mostrarPregunta(pregunta, respuestas, respuestaCorrecta);
         });
 
@@ -105,18 +105,6 @@ public class Pregunton extends Application {
 
 
         });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -136,7 +124,7 @@ public class Pregunton extends Application {
         for(String r : preguntas.get(indicePreguntaActual).getRespuestas()) {
             respuestas.getItems().add(r);
         }
-
+        respuestas.setPromptText("Elige una respuesta");
         respuestaCorrecta.setText(preguntas.get(indicePreguntaActual)
                 .getRespuestas()[preguntas.get(indicePreguntaActual)
                 .getIndiceCorrecto()]);
@@ -154,5 +142,10 @@ public class Pregunton extends Application {
                 new Pregunta("¿Cuántos planetas tiene nuestro sistema solar",
                         new String[] {"10", "2", "3", "8", "11"},
                         3));
+
+        preguntas.add(
+                new Pregunta("¿Cuántos satelites naturales tiene el planeta tierra?",
+                        new String[] {"10", "2", "3", "8", "1"},
+                        4));
     }
 }
