@@ -11,7 +11,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class Practica_010_ListView extends Application {
+public class Practica010_ListView extends Application {
 
     public static void main(String[] args) {
         launch(args);
