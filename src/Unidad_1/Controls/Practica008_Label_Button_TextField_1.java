@@ -54,7 +54,7 @@ public class Practica008_Label_Button_TextField_1 extends Application implements
         botonLimpiar = new Button("Limpiar resultado");
 
 
-        contenedor.add(titulo, 1, 0);
+        contenedor.add(titulo, 1, 0, 2, 1);
         contenedor.add(labelValor1, 0,1);   contenedor.add(textFieldValor1, 1,1);
         contenedor.add(labelValor2, 0,2);   contenedor.add(textFieldValor2, 1, 2);
 
