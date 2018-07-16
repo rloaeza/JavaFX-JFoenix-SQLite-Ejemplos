@@ -23,7 +23,7 @@ public class Evaluacion1 extends Application {
     public void start(Stage primaryStage) throws Exception {
         int alto = 50;
         int ancho = 110;
-        int separador = 15;
+        int separador = 19;
         Button b1 = new Button("1");
         Button b2 = new Button("2");
         Button b3 = new Button("3");
