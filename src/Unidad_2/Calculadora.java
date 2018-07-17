@@ -1,6 +1,7 @@
 package Unidad_2;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,11 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Calculadora extends Application {
 
     private double numero1;
     private String operacion;
+    private Stage ventana;
 
     @FXML
     private TextField display;
@@ -74,8 +77,7 @@ public class Calculadora extends Application {
 
     @FXML
     void salir(ActionEvent event) {
-        System.exit(0);
-
+        Platform.exit();
     }
 
 
@@ -93,12 +95,16 @@ public class Calculadora extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        ventana = primaryStage;
+
 
         Parent layout = FXMLLoader.load(getClass().getResource("Calculadora.fxml"));
 
         Scene scene = new Scene(layout);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Calculadora Básica");
-        primaryStage.show();
+
+        ventana.setScene(scene);
+        ventana.setTitle("Calculadora Básica");
+        ventana.show();
+
     }
 }
