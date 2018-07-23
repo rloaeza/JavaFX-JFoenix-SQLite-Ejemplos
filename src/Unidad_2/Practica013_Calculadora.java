@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-public class Calculadora extends Application {
+public class Practica013_Calculadora extends Application {
 
     private double numero1;
     private String operacion;
@@ -98,12 +98,12 @@ public class Calculadora extends Application {
         ventana = primaryStage;
 
 
-        Parent layout = FXMLLoader.load(getClass().getResource("Calculadora.fxml"));
+        Parent layout = FXMLLoader.load(getClass().getResource("Practica013_Calculadora.fxml"));
 
         Scene scene = new Scene(layout);
 
         ventana.setScene(scene);
-        ventana.setTitle("Calculadora Básica");
+        ventana.setTitle("Practica013_Calculadora Básica");
         ventana.show();
 
     }

@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class EditorDeTexto extends Application {
+public class Practica014_EditorDeTexto extends Application {
     private String nombreArchivo="";
     private boolean modificado;
     private static Stage stage;
@@ -111,6 +111,7 @@ public class EditorDeTexto extends Application {
     @FXML
     void menuSalir(ActionEvent event) {
         Platform.exit();
+        System.exit(0);
     }
 
     @Override
@@ -118,7 +119,7 @@ public class EditorDeTexto extends Application {
 
         Parent layout = FXMLLoader.
                 load(getClass().
-                getResource("EditorDeTexto.fxml"));
+                getResource("Practica014_EditorDeTexto.fxml"));
 
         Scene scene = new Scene(layout);
         primaryStage.setScene(scene);
