@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Formularios extends Application {
 
@@ -64,7 +66,31 @@ public class Formularios extends Application {
 
     }
 
-    private void mostrarPane(String opc) {
+    private void mostrarPane(String pane) {
+        switch (pane) {
+            case "Usuario":
+                if( paneUsuario.isVisible()) {
+                    paneUsuario.setVisible(false);
+                    upUsuario.setVisible(false);
+                    return;
+                }
+                break;
+            case "Escuela":
+                if( paneEscuela.isVisible()) {
+                    paneEscuela.setVisible(false);
+                    upEscuela.setVisible(false);
+                    return;
+                }
+                break;
+            case "Mapa":
+                if( paneMapa.isVisible()) {
+                    paneMapa.setVisible(false);
+                    upMapa.setVisible(false);
+                    return;
+                }
+                break;
+        }
+
         paneUsuario.setVisible(false);
         paneMapa.setVisible(false);
         paneEscuela.setVisible(false);
@@ -72,7 +98,7 @@ public class Formularios extends Application {
         upEscuela.setVisible(false);
         upMapa.setVisible(false);
 
-        switch (opc) {
+        switch (pane) {
             case "Usuario":
                 paneUsuario.setVisible(true);
                 upUsuario.setVisible(true);
@@ -87,14 +113,31 @@ public class Formularios extends Application {
                 break;
         }
     }
+    private double posX, posY;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent layout = FXMLLoader.
                 load(getClass().getResource("Formularios.fxml"));
 
+
+        layout.setOnMousePressed(e -> {
+            posX = primaryStage.getX()-e.getX();
+            posY = primaryStage.getY()-e.getY();
+           // System.out.println("0: "+ posX + ", " + posY);
+            //System.out.println("1: "+primaryStage.getX() + ", " + primaryStage.getY());
+        });
+
+        layout.setOnMouseDragged(e -> {
+            primaryStage.setX(e.getX()+posX);
+            primaryStage.setY(e.getY()+posY);
+        });
+
         Scene scene = new Scene(layout);
+        scene.setFill(Color.TRANSPARENT);
+
         primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
     }
 }
