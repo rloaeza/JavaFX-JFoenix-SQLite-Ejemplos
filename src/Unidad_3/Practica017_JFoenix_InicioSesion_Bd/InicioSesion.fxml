@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #21334f;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Unidad_2.Practica015_JFoenix_InicioSesion.InicioSesion">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #21334f;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Unidad_3.Practica017_JFoenix_InicioSesion_Bd.InicioSesion">
    <children>
       <ImageView fitHeight="50.0" fitWidth="38.0" layoutX="17.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,9 +21,9 @@
             <Font name="Hiragino Sans GB W3" size="28.0" />
          </font>
       </Label>
-      <JFXTextField focusColor="#c5c8d0" layoutX="281.0" layoutY="82.0" prefHeight="27.0" prefWidth="270.0" promptText="correo@dominio.edu" style="-fx-text-fill: WHITE; -fx-prompt-text-fill: GRAY;" unFocusColor="#615a5a" />
-      <JFXPasswordField focusColor="#c5c8d0" layoutX="281.0" layoutY="148.0" prefHeight="27.0" prefWidth="270.0" promptText="Contraseña" style="-fx-text-fill: WHITE; -fx-prompt-text-fill: GRAY;" unFocusColor="#615a5a" />
-      <JFXButton layoutX="281.0" layoutY="225.0" onAction= prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #508c46;" text="Conectar" textFill="WHITE">
+      <JFXTextField fx:id="usuario" focusColor="#c5c8d0" layoutX="281.0" layoutY="82.0" prefHeight="27.0" prefWidth="270.0" promptText="correo@dominio.edu" style="-fx-text-fill: WHITE; -fx-prompt-text-fill: GRAY;" unFocusColor="#615a5a" />
+      <JFXPasswordField fx:id="clave" focusColor="#c5c8d0" layoutX="281.0" layoutY="148.0" prefHeight="27.0" prefWidth="270.0" promptText="Contraseña" style="-fx-text-fill: WHITE; -fx-prompt-text-fill: GRAY;" unFocusColor="#615a5a" />
+      <JFXButton fx:id="bConectar" layoutX="281.0" layoutY="225.0" onAction="#conectar" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #508c46;" text="Conectar" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
