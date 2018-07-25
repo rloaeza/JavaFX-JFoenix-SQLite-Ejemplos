@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -46,8 +45,14 @@ public class PuntoVenta extends Application {
     }
 
     @FXML
-    void menuProveedores(ActionEvent event) throws IOException {
-        Parent layout = FXMLLoader.load(getClass().getResource("Proveedores.fxml"));
+    void menuEditarProveedores(ActionEvent event) throws IOException {
+        Parent layout = FXMLLoader.load(getClass().getResource("ProveedoresEditar.fxml"));
+        contenedor.getChildren().add(layout);
+    }
+
+    @FXML
+    void menuNuevoProveedores(ActionEvent event) throws IOException {
+        Parent layout = FXMLLoader.load(getClass().getResource("ProveedoresNuevo.fxml"));
         contenedor.getChildren().add(layout);
     }
 

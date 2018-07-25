@@ -19,7 +19,8 @@
             <items>
                   <Menu mnemonicParsing="false" text="Proveedores">
                     <items>
-                    <MenuItem mnemonicParsing="false" onAction="#menuProveedores" text="Nuevo proveedor" />
+                    <MenuItem mnemonicParsing="false" onAction="#menuNuevoProveedores" text="Nuevo proveedor" />
+                        <MenuItem mnemonicParsing="false" onAction="#menuEditarProveedores" text="Editar proveedor" />
                     </items>
                   </Menu>
                   <MenuItem mnemonicParsing="false" onAction="#menuProductos" text="Productos" />

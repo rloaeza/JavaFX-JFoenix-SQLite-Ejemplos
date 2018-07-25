@@ -11,7 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Proveedores {
+public class ProveedoresNuevo {
 
     @FXML
     private AnchorPane contenedor;
@@ -65,6 +65,8 @@ public class Proveedores {
                 "'"+celular.getText()+"', " +
                 "'"+email.getText()+"' ) ";
         statement.execute(sql);
+        statement.close();
+        connection.close();
         nombre.setText("");
         rfc.setText("");
         calle.setText("");
