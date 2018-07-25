@@ -73,7 +73,7 @@ public class ProveedoresEditar implements Initializable {
                 " WHERE idProveedor="+proveedores.get(indice).
                                                     getIdProveedor();
         statement.execute(sql);
-        
+
         proveedores.get(indice).setNombre(nombre.getText());
         proveedores.get(indice).setRfc(rfc.getText());
         proveedores.get(indice).setCalle(calle.getText());
@@ -83,9 +83,6 @@ public class ProveedoresEditar implements Initializable {
         proveedores.get(indice).setTelefono(telefono.getText());
         proveedores.get(indice).setCelular(celular.getText());
         proveedores.get(indice).setEmail(email.getText());
-
-
-
 
     }
 
