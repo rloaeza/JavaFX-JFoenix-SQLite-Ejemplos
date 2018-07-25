@@ -131,6 +131,9 @@ public class Formularios extends Application {
         layout.setOnMouseDragged(e -> {
             primaryStage.setX(e.getX()+posX);
             primaryStage.setY(e.getY()+posY);
+
+
+
         });
 
         Scene scene = new Scene(layout);

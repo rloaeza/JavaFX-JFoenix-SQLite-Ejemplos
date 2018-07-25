@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Unidad_3.Practica018_PuntoVenta.PuntoVenta">
+   <children>
+      <MenuBar layoutY="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivo">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#menuSalir" text="Salir" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Almacen">
+            <items>
+                  <Menu mnemonicParsing="false" text="Proveedores">
+                    <items>
+                    <MenuItem mnemonicParsing="false" onAction="#menuProveedores" text="Nuevo proveedor" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#menuProductos" text="Productos" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuExistencia" text="Existencia" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Clientes">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#menuClientes" text="Clientes" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ventas">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#menuNuevaVenta" text="Nueva venta" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Ayuda">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#menuAcercaDe" text="Acerca de..." />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Pane fx:id="contenedor" layoutY="29.0" prefHeight="372.0" prefWidth="600.0" style="-fx-background-color: #2b705c;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</AnchorPane>
