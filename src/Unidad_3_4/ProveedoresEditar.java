@@ -53,7 +53,39 @@ public class ProveedoresEditar implements Initializable {
     private ArrayList<Proveedor> proveedores;
 
     @FXML
-    void actualizar(ActionEvent event) {
+    void actualizar(ActionEvent event) throws SQLException {
+        Connection connection = DriverManager.
+                getConnection("jdbc:sqlite:pventa.db");
+
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(60);
+
+        String sql = "UPDATE proveedores SET " +
+                "nombre='"+nombre.getText()+"', " +
+                "rfc='"+rfc.getText()+"', " +
+                "calle='"+calle.getText()+"', " +
+                "colonia='"+colonia.getText()+"', " +
+                "ciudad='"+ciudad.getText()+"', " +
+                "pais='"+pais.getText()+"', " +
+                "telefono='"+telefono.getText()+"', " +
+                "celular='"+celular.getText()+"', " +
+                "email='"+email.getText()+"' " +
+                " WHERE idProveedor="+proveedores.get(indice).
+                                                    getIdProveedor();
+        statement.execute(sql);
+        
+        proveedores.get(indice).setNombre(nombre.getText());
+        proveedores.get(indice).setRfc(rfc.getText());
+        proveedores.get(indice).setCalle(calle.getText());
+        proveedores.get(indice).setColonia(colonia.getText());
+        proveedores.get(indice).setCiudad(ciudad.getText());
+        proveedores.get(indice).setPais(pais.getText());
+        proveedores.get(indice).setTelefono(telefono.getText());
+        proveedores.get(indice).setCelular(celular.getText());
+        proveedores.get(indice).setEmail(email.getText());
+
+
+
 
     }
 
@@ -75,7 +107,10 @@ public class ProveedoresEditar implements Initializable {
                 proveedores.get(indice).getIdProveedor();
 
         statement.execute(sql);
-        
+
+        statement.close();
+        connection.close();
+
         proveedor.getItems().remove(indice);
         proveedores.remove(indice);
         nombre.setText("");
