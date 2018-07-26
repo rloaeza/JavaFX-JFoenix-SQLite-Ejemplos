@@ -23,8 +23,11 @@ public class PuntoDeVenta extends Application {
     }
 
     @FXML
-    void editarCliente(ActionEvent event) {
+    void editarCliente(ActionEvent event) throws IOException {
 
+        Parent layout = FXMLLoader.load(getClass().
+                getResource("ClientesEditar.fxml"));
+        contenedor.getChildren().add(layout);
     }
 
     @FXML
@@ -61,8 +64,11 @@ public class PuntoDeVenta extends Application {
     }
 
     @FXML
-    void nuevoCliente(ActionEvent event) {
+    void nuevoCliente(ActionEvent event) throws IOException {
+        Parent layout = FXMLLoader.load(getClass().
+                getResource("ClientesNuevo.fxml"));
 
+        contenedor.getChildren().add(layout);
     }
 
     @FXML
