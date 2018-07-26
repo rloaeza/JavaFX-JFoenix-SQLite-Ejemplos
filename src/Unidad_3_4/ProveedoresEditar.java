@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -70,8 +69,8 @@ public class ProveedoresEditar implements Initializable {
                 "telefono='"+telefono.getText()+"', " +
                 "celular='"+celular.getText()+"', " +
                 "email='"+email.getText()+"' " +
-                " WHERE idProveedor="+proveedores.get(indice).
-                                                    getIdProveedor();
+                " WHERE idProveedor="+proveedores.get(indice).getIdProveedor();
+
         statement.execute(sql);
 
         proveedores.get(indice).setNombre(nombre.getText());
@@ -100,16 +99,15 @@ public class ProveedoresEditar implements Initializable {
         Statement statement = connection.createStatement();
         statement.setQueryTimeout(60);
 
-        String sql = "DELETE FROM proveedores WHERE idProveedor="+
-                proveedores.get(indice).getIdProveedor();
+        String sql = "DELETE FROM proveedores WHERE idProveedor=" + proveedores.get(indice).getIdProveedor();
 
         statement.execute(sql);
-
         statement.close();
         connection.close();
 
         proveedor.getItems().remove(indice);
         proveedores.remove(indice);
+
         nombre.setText("");
         rfc.setText("");
         calle.setText("");
@@ -156,9 +154,7 @@ public class ProveedoresEditar implements Initializable {
             }
 
             proveedor.setOnAction( e-> {
-                indice = proveedor.getSelectionModel().
-                        getSelectedIndex();
-
+                indice = proveedor.getSelectionModel().getSelectedIndex();
                 nombre.setText(proveedores.get(indice).getNombre());
                 rfc.setText(proveedores.get(indice).getRfc());
                 calle.setText(proveedores.get(indice).getCalle());
@@ -169,14 +165,8 @@ public class ProveedoresEditar implements Initializable {
                 celular.setText(proveedores.get(indice).getCelular());
                 email.setText(proveedores.get(indice).getEmail());
             });
-
             statement.close();
             connection.close();
-
-
-
-
-
 
         } catch (SQLException e) {
             e.printStackTrace();
