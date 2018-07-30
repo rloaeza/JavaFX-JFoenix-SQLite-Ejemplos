@@ -36,8 +36,11 @@ public class PuntoDeVenta extends Application {
     }
 
     @FXML
-    void editarProducto(ActionEvent event) {
+    void editarProducto(ActionEvent event) throws IOException {
+        Parent layout = FXMLLoader.load(getClass().
+                getResource("ProductosEditar.fxml"));
 
+        contenedor.getChildren().add(layout);
     }
 
     @FXML
@@ -67,13 +70,14 @@ public class PuntoDeVenta extends Application {
     void nuevoCliente(ActionEvent event) throws IOException {
         Parent layout = FXMLLoader.load(getClass().
                 getResource("ClientesNuevo.fxml"));
-
         contenedor.getChildren().add(layout);
     }
 
     @FXML
-    void nuevoProducto(ActionEvent event) {
-
+    void nuevoProducto(ActionEvent event) throws IOException {
+        Parent layout = FXMLLoader.load(getClass().
+                getResource("ProductosNuevo.fxml"));
+        contenedor.getChildren().add(layout);
     }
 
     @FXML
