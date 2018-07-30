@@ -31,8 +31,11 @@ public class PuntoDeVenta extends Application {
     }
 
     @FXML
-    void editarExistencia(ActionEvent event) {
+    void editarExistencia(ActionEvent event) throws IOException {
+        Parent layout = FXMLLoader.load(getClass().
+                getResource("ExistenciaEditar.fxml"));
 
+        contenedor.getChildren().add(layout);
     }
 
     @FXML
@@ -57,8 +60,10 @@ public class PuntoDeVenta extends Application {
     }
 
     @FXML
-    void nuevaExistencia(ActionEvent event) {
-
+    void nuevaExistencia(ActionEvent event) throws IOException {
+        Parent layout = FXMLLoader.load(getClass().
+                getResource("ExistenciaNuevo.fxml"));
+        contenedor.getChildren().add(layout);
     }
 
     @FXML
