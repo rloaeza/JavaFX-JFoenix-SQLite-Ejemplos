@@ -102,6 +102,7 @@ public class VentaNueva implements Initializable {
             int idCliente = clientes.get(cliente.getSelectionModel().getSelectedIndex()).getIdCliente();
             double total = calcularTotal();
 
+            int idVenta=-1;
             Connection connection = DriverManager.getConnection("jdbc:sqlite:pventa.db");
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(60);
@@ -116,7 +117,12 @@ public class VentaNueva implements Initializable {
 
             ResultSet resultSet= statement.executeQuery(sql);
             if(resultSet.next()) {
-                System.out.println(resultSet.getString(1));
+                idVenta = resultSet.getInt(1);
+            }
+
+            for(Venta v: elementosTabla) {
+                sql = "INSERT INTO VentasDetalle(idVenta, idProducto, costo) VALUES (" + idVenta+", "+v.getIdProducto()+", "+v.getCosto()+")";
+                statement.execute(sql);
             }
 
             producto.clear();
@@ -160,6 +166,7 @@ public class VentaNueva implements Initializable {
                     resultSet = statement.executeQuery(sql);
 
                     clientes = new ArrayList<Cliente>();
+                    cliente.getItems().clear();
                     while(resultSet.next()) {
                         clientes.add(new Cliente(
                                 resultSet.getInt("idCliente"),
