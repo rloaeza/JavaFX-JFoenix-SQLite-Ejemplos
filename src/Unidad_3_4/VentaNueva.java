@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.sql.*;
@@ -29,7 +30,7 @@ public class VentaNueva implements Initializable {
 
     private double calcularTotal() {
         double total = 0;
-        
+
         for(VentaElementos v : ventaElementos) {
             total = total + v.getCostoT();
         }
@@ -60,16 +61,84 @@ public class VentaNueva implements Initializable {
 
     @FXML
     void AgregarProducto(ActionEvent event) {
-        ventaElementos.add(new VentaElementos(1,1, 20, "Producto X", 20));
+        int indiceLista = listaProductos.
+                getSelectionModel().getSelectedIndex();
+        if( indiceLista < 0)
+            return;
+
+        int cantidadProductoExistente = ventaProductoCostos.
+                                get(indiceLista).getCantidad();
+
+        int cantidadProducto = Integer.valueOf(
+                cantidad.getText().isEmpty()?"1":cantidad.getText()
+        );
+
+        if(cantidadProducto>cantidadProductoExistente)
+            return;
+
+        int idProducto = ventaProductoCostos.
+                get(indiceLista).getIdProducto();
+        int idExistencia = ventaProductoCostos.
+                get(indiceLista).getIdExistencia();
+        String nombreProducto = ventaProductoCostos.
+                get(indiceLista).getNombre();
+        double costoUnitario = ventaProductoCostos.
+                get(indiceLista).getCosto();
+
+        ventaElementos.add(new VentaElementos(
+                idProducto,
+                idExistencia,
+                cantidadProducto,
+                nombreProducto,
+                costoUnitario));
+
+        granTotal.setText(String.valueOf(calcularTotal()));
     }
 
     @FXML
     void Cancelar(ActionEvent event) {
+        Pane p = (Pane)contenedor.getParent();
+        p.getChildren().remove(0);
+
 
     }
 
     @FXML
-    void Guardar(ActionEvent event) {
+    void Guardar(ActionEvent event) throws SQLException {
+        if( ventaElementos.size()==0)
+            return;
+        int idClienteCombo = cliente.getSelectionModel().getSelectedIndex();
+        int idCliente = clientes.get(idClienteCombo).getIdCliente();
+        double total = calcularTotal();
+
+        Connection connection = DriverManager.
+                getConnection("jdbc:sqlite:pventa.db");
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(60);
+
+        String sql = "INSERT INTO ventas(idCliente, fecha, total) " +
+                "VALUES ("+idCliente+", date('now'), "+total+")";
+
+        statement.execute(sql);
+
+        sql = "SELECT  last_insert_rowid()";
+
+        ResultSet resultSet = statement.executeQuery(sql);
+        int idVenta=-1;
+        if(resultSet.next()) {
+            idVenta = resultSet.getInt(1);
+        }
+
+        for(VentaElementos v: ventaElementos) {
+            sql = "INSERT INTO VentasDetalle (idVenta, idProducto, costo) " +
+                    "VALUES ("+
+                    idVenta+", "+
+                    v.getIdProducto()+", "+
+                    v.getCostoT()+")";
+            statement.execute(sql);
+        }
+        ventaElementos.clear();
+        granTotal.setText(String.valueOf(calcularTotal()));
 
     }
 
