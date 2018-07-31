@@ -100,4 +100,8 @@ public class PuntoDeVenta extends Application {
         primaryStage.setTitle("Punto de Venta 0.0.1");
         primaryStage.show();
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
