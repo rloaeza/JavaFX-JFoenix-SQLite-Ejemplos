@@ -1,5 +1,6 @@
 package Unidad_3_4;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -25,6 +26,7 @@ public class VentaNueva implements Initializable {
 
     private ArrayList<VentaListaProductos> productos;
     private ObservableList<Venta> elementosTabla;
+    private ArrayList<Cliente> clientes;
 
 
     @FXML
@@ -32,6 +34,9 @@ public class VentaNueva implements Initializable {
 
     @FXML
     private JFXTextField producto;
+
+    @FXML
+    private JFXComboBox<String> cliente;
 
     @FXML
     private JFXListView<String> listaProductos;
@@ -92,7 +97,34 @@ public class VentaNueva implements Initializable {
     }
 
     @FXML
-    void Guardar(ActionEvent event) {
+    void Guardar(ActionEvent event) throws SQLException {
+
+            int idCliente = clientes.get(cliente.getSelectionModel().getSelectedIndex()).getIdCliente();
+            double total = calcularTotal();
+
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:pventa.db");
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(60);
+
+            String sql = "INSERT INTO ventas(idCliente, fecha, total) VALUES(" +
+                    idCliente+ "," +
+                    "date('now'), "+
+                    total+")";
+            statement.execute(sql);
+
+            sql = "SELECT last_insert_rowid()";
+
+            ResultSet resultSet= statement.executeQuery(sql);
+            if(resultSet.next()) {
+                System.out.println(resultSet.getString(1));
+            }
+
+            producto.clear();
+            listaProductos.getItems().clear();
+            productos.clear();
+            elementosTabla.clear();
+            granTotal.setText("0.0");
+
 
     }
 
@@ -123,6 +155,29 @@ public class VentaNueva implements Initializable {
                                 resultSet.getDouble("costo")
                                 ));
                     }
+                    sql = "SELECT * FROM clientes";
+
+                    resultSet = statement.executeQuery(sql);
+
+                    clientes = new ArrayList<Cliente>();
+                    while(resultSet.next()) {
+                        clientes.add(new Cliente(
+                                resultSet.getInt("idCliente"),
+                                resultSet.getString("nombre"),
+                                resultSet.getString("rfc"),
+                                resultSet.getString("calle"),
+                                resultSet.getString("colonia"),
+                                resultSet.getString("ciudad"),
+                                resultSet.getString("pais"),
+                                resultSet.getString("telefono"),
+                                resultSet.getString("celular"),
+                                resultSet.getString("email")
+                        ));
+                        cliente.getItems().add(
+                                resultSet.getString("nombre"));
+
+                    }
+
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }

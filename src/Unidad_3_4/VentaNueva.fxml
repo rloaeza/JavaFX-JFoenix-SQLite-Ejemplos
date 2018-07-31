@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
@@ -12,10 +13,10 @@
    <children>
       <Label layoutX="45.0" layoutY="13.0" prefHeight="17.0" prefWidth="65.0" text="Producto" />
       <JFXTextField fx:id="producto" layoutX="110.0" layoutY="6.0" prefHeight="27.0" prefWidth="146.0" promptText="¿Qué busca?" />
-      <JFXListView fx:id="listaProductos" layoutX="273.0" layoutY="17.0" prefHeight="116.0" prefWidth="305.0" />
+      <JFXListView fx:id="listaProductos" layoutX="273.0" layoutY="17.0" prefHeight="66.0" prefWidth="305.0" />
       <Label layoutX="45.0" layoutY="58.0" prefHeight="17.0" prefWidth="65.0" text="Cantidad" />
       <JFXTextField fx:id="cantidad" layoutX="111.0" layoutY="51.0" prefHeight="27.0" prefWidth="146.0" promptText="1" />
-      <JFXButton layoutX="111.0" layoutY="96.0" onAction="#AgregarProducto" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: lightgreen;" text="Agregar" />
+      <JFXButton layoutX="433.0" layoutY="100.0" onAction="#AgregarProducto" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: lightgreen;" text="Agregar" />
       <TableView fx:id="tabla" layoutX="110.0" layoutY="140.0" prefHeight="177.0" prefWidth="469.0" />
       <Label fx:id="granTotal" alignment="CENTER_RIGHT" layoutX="512.0" layoutY="318.0" prefHeight="17.0" prefWidth="65.0" text="0.0" textAlignment="RIGHT">
          <font>
@@ -25,5 +26,7 @@
       <JFXButton layoutX="284.0" layoutY="330.0" onAction="#Cancelar" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: lightgray;" text="Cancelar" />
       <JFXButton layoutX="110.0" layoutY="330.0" onAction="#Guardar" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: lightgreen;" text="Guardar" />
       <JFXButton layoutX="14.0" layoutY="215.0" onAction="#Quitar" prefHeight="27.0" prefWidth="86.0" style="-fx-background-color: yellow;" text="Quitar" />
+      <Label layoutX="45.0" layoutY="105.0" prefHeight="17.0" prefWidth="65.0" text="Cliente" />
+      <JFXComboBox fx:id="cliente" layoutX="110.0" layoutY="96.0" prefHeight="27.0" prefWidth="305.0" />
    </children>
 </AnchorPane>
