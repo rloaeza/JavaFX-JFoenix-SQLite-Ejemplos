@@ -23,82 +23,71 @@ public class PuntoDeVenta extends Application {
     }
 
     @FXML
-    void editarCliente(ActionEvent event) throws IOException {
+    void editarCliente(ActionEvent event) {
 
-        Parent layout = FXMLLoader.load(getClass().
-                getResource("ClientesEditar.fxml"));
-        contenedor.getChildren().add(layout);
+        cargarFormulario("ClientesEditar.fxml");
     }
 
     @FXML
-    void editarExistencia(ActionEvent event) throws IOException {
-        Parent layout = FXMLLoader.load(getClass().
-                getResource("ExistenciaEditar.fxml"));
-
-        contenedor.getChildren().add(layout);
+    void editarExistencia(ActionEvent event) {
+        cargarFormulario("ExistenciaEditar.fxml");
     }
 
     @FXML
-    void editarProducto(ActionEvent event) throws IOException {
-        Parent layout = FXMLLoader.load(getClass().
-                getResource("ProductosEditar.fxml"));
-
-        contenedor.getChildren().add(layout);
+    void editarProducto(ActionEvent event) {
+        cargarFormulario("ProductosEditar.fxml");
     }
 
     @FXML
-    void editarProveedor(ActionEvent event) throws IOException {
-        Parent layout = FXMLLoader.load(getClass().
-                getResource("ProveedoresEditar.fxml"));
+    void editarProveedor(ActionEvent event) {
+        cargarFormulario("ProveedoresEditar.fxml");
+    }
 
-        contenedor.getChildren().add(layout);
+
+
+    @FXML
+    void nuevaExistencia(ActionEvent event) {
+        cargarFormulario("ExistenciaNuevo.fxml");
     }
 
     @FXML
-    void editarVenta(ActionEvent event) {
-
+    void nuevaVenta(ActionEvent event) {
+        cargarFormulario("VentaNueva.fxml");
     }
 
     @FXML
-    void nuevaExistencia(ActionEvent event) throws IOException {
-        Parent layout = FXMLLoader.load(getClass().
-                getResource("ExistenciaNuevo.fxml"));
-        contenedor.getChildren().add(layout);
+    void nuevoCliente(ActionEvent event)  {
+        cargarFormulario("ClientesNuevo.fxml");
     }
 
     @FXML
-    void nuevaVenta(ActionEvent event) throws IOException {
-        Parent layout = FXMLLoader.load(getClass().
-                getResource("VentaNueva.fxml"));
-        contenedor.getChildren().add(layout);
+    void nuevoProducto(ActionEvent event)  {
+        cargarFormulario("ProductosNuevo.fxml");
     }
 
     @FXML
-    void nuevoCliente(ActionEvent event) throws IOException {
-        Parent layout = FXMLLoader.load(getClass().
-                getResource("ClientesNuevo.fxml"));
-        contenedor.getChildren().add(layout);
-    }
-
-    @FXML
-    void nuevoProducto(ActionEvent event) throws IOException {
-        Parent layout = FXMLLoader.load(getClass().
-                getResource("ProductosNuevo.fxml"));
-        contenedor.getChildren().add(layout);
-    }
-
-    @FXML
-    void nuevoProveedor(ActionEvent event) throws IOException {
-        Parent layout = FXMLLoader.load(getClass().
-                getResource("ProveedoresNuevo.fxml"));
-
-        contenedor.getChildren().add(layout);
-
+    void nuevoProveedor(ActionEvent event)  {
+        cargarFormulario("ProveedoresNuevo.fxml");
     }
 
     @FXML
     void salir(ActionEvent event) {
         Platform.exit();
+    }
+
+    private void cargarFormulario(String formulario) {
+
+        try {
+            contenedor.getChildren().clear();
+            Parent layout = FXMLLoader.load(getClass().
+                    getResource(formulario));
+            contenedor.getChildren().add(layout);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
     @Override
