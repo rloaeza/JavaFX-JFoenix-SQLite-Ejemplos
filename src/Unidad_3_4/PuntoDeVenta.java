@@ -67,8 +67,10 @@ public class PuntoDeVenta extends Application {
     }
 
     @FXML
-    void nuevaVenta(ActionEvent event) {
-
+    void nuevaVenta(ActionEvent event) throws IOException {
+        Parent layout = FXMLLoader.load(getClass().
+                getResource("VentaNueva.fxml"));
+        contenedor.getChildren().add(layout);
     }
 
     @FXML
