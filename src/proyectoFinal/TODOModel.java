@@ -3,7 +3,7 @@ package proyectoFinal;
 public class TODOModel {
     private int id;
     private String titulo;
-    private String descripcion;
+    private String descripcion; 
     private boolean hecho;
 
     public TODOModel(int id, String titulo, String descripcion, boolean hecho) {
