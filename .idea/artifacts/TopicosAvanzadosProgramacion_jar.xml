@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TopicosAvanzadosProgramacion:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TopicosAvanzadosProgramacion_jar</output-path>
+    <root id="archive" name="TopicosAvanzadosProgramacion.jar">
+      <element id="module-output" name="TopicosAvanzadosProgramacion" />
+      <element id="extracted-dir" path="$USER_HOME$/libs/java/jfoenix-9.0.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/libs/java/sqlite-jdbc-3.23.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
