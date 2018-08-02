@@ -9,7 +9,7 @@ public class TODOModel {
     public TODOModel(int id, String titulo, String descripcion, boolean hecho) {
         this.id = id;
         this.titulo = titulo;
-        descripcion = descripcion;
+        this.descripcion = descripcion;
         this.hecho = hecho;
     }
     public int getId() {

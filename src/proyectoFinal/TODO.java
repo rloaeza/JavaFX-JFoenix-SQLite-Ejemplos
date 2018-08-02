@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -36,6 +37,11 @@ public class TODO extends Application implements Initializable {
     private boolean editandoNota;
     private int indice;
     private int id;
+
+    private Connection connection;
+    private Statement statement;
+
+    private ResultSet resultSet;
 
     @FXML
     private TilePane activas;
@@ -49,8 +55,6 @@ public class TODO extends Application implements Initializable {
     @FXML
     private JFXTextArea descripcion;
 
-    @FXML
-    private TilePane inactivas;
 
     @FXML
     private JFXButton NuevoEditar;
@@ -58,6 +62,21 @@ public class TODO extends Application implements Initializable {
     @FXML
     void Salir(MouseEvent event ){
         Platform.exit();
+    }
+
+    @FXML
+    void LimpiarHechos(MouseEvent event) {
+        try {
+            EjecutarSQL("DELETE FROM Actividades WHERE hecho=1");
+            for(int i=todoModels.size()-1; i>=0; i--) {
+                if(todoModels.get(i).isHecho()) {
+                    todoModels.remove(i);
+                    activas.getChildren().remove(i);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -69,17 +88,29 @@ public class TODO extends Application implements Initializable {
         NuevoEditar.setText("Guardar Nuevo");
     }
     @FXML
-    void NuevoEditar(ActionEvent event) {
+    void NuevoEditar(ActionEvent event) throws SQLException {
         GridPane nuevo = crearNota(titulo.getText(), descripcion.getText(), hecho.isSelected());
         if( editandoNota) {
             todoModels.get(indice).setTitulo(titulo.getText());
             todoModels.get(indice).setDescripcion(descripcion.getText());
             todoModels.get(indice).setHecho(hecho.isSelected());
             activas.getChildren().set(indice, nuevo);
+            EjecutarSQL("UPDATE Actividades SET " +
+                    "titulo='"+ titulo.getText() +"', " +
+                    "descripcion='" + descripcion.getText()+"', " +
+                    "hecho="+hecho.isSelected()+
+                    " WHERE idActividad="+todoModels.get(indice).getId()
+            );
+
+
         }
         else {
             todoModels.add(new TODOModel(id, titulo.getText(), descripcion.getText(), hecho.isSelected()));
             activas.getChildren().add(nuevo);
+            EjecutarSQL("INSERT INTO Actividades (titulo, descripcion, hecho) VALUES " +
+                    "('"+ titulo.getText() +"', " +
+                    "'" + descripcion.getText()+"', " +
+                    hecho.isSelected()+")");
         }
 
         titulo.setText("");
@@ -88,6 +119,8 @@ public class TODO extends Application implements Initializable {
         editandoNota =false;
         NuevoEditar.setText("Guardar Nuevo");
     }
+
+
 
     private GridPane crearNota(String titulo, String descripcion, boolean activa) {
         GridPane nuevo = new GridPane();
@@ -112,9 +145,9 @@ public class TODO extends Application implements Initializable {
         nuevo.add(new Label(descripcion), 0, 1);
 
         if(activa)
-            nuevo.setStyle("-fx-background-color:#c9dbd2; -fx-opacity:1;");
+            nuevo.setStyle("-fx-background-color:#425e3a; -fx-opacity:1;");
         else
-            nuevo.setStyle("-fx-background-color:#8fc4a8; -fx-opacity:1;");
+            nuevo.setStyle("-fx-background-color:#8fc67f; -fx-opacity:1;");
 
         nuevo.setOnMouseClicked(e -> {
             indice = buscame((GridPane) e.getSource());
@@ -152,16 +185,22 @@ public class TODO extends Application implements Initializable {
         primaryStage.show();
 
 
-        layout.setOnMousePressed(e -> {
-            posX = primaryStage.getX()-e.getX();
-            posY = primaryStage.getY()-e.getY();
-            // System.out.println("0: "+ posX + ", " + posY);
-            //System.out.println("1: "+primaryStage.getX() + ", " + primaryStage.getY());
+        scene.setOnMousePressed(e -> {
+            //posX = primaryStage.getX()-e.getX();  // Este código no funciona bien
+            //posY = primaryStage.getY()-e.getY();  // se ve un lag
+
+            posX = e.getSceneX();
+            posY = e.getSceneY();
+
+
         });
 
-        layout.setOnMouseDragged(e -> {
-            primaryStage.setX(e.getX()+posX);
-            primaryStage.setY(e.getY()+posY);
+        scene.setOnMouseDragged(e -> {
+            //primaryStage.setX(e.getX()+posX);  // Este código no funciona bien
+            //primaryStage.setY(e.getY()+posY);  // se ve un lag
+
+            primaryStage.setX(e.getScreenX()-posX);
+            primaryStage.setY(e.getScreenY()-posY);
 
 
 
@@ -170,12 +209,60 @@ public class TODO extends Application implements Initializable {
 
     }
 
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         activas.setHgap(10);
         activas.setVgap(10);
         todoModels = new ArrayList<>();
         editandoNota = false;
+
+        try {
+            resultSet = ConsultarSQL("SELECT * FROM Actividades");
+            todoModels.clear();
+            while(resultSet.next()) {
+                todoModels.add(new TODOModel(
+                        resultSet.getInt("idActividad"),
+                        resultSet.getString("titulo"),
+                        resultSet.getString("descripcion"),
+                        resultSet.getBoolean("hecho")
+                        ));
+                activas.getChildren().add(crearNota(
+                        resultSet.getString("titulo"),
+                        resultSet.getString("descripcion"),
+                        resultSet.getBoolean("hecho")
+
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+    private ResultSet ConsultarSQL(String sql) throws SQLException {
+
+
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:todo.db");
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(60);
+        return statement.executeQuery(sql);
+
+
+    }
+    private void EjecutarSQL(String sql) throws SQLException {
+
+
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:todo.db");
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(60);
+        statement.execute(sql);
+        statement.close();
+        connection.close();
+
 
     }
 }
