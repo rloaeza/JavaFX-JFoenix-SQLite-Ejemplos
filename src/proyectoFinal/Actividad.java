@@ -1,12 +1,12 @@
 package proyectoFinal;
 
-public class TODOModel {
+public class Actividad {
     private int id;
     private String titulo;
     private String descripcion; 
     private boolean hecho;
 
-    public TODOModel(int id, String titulo, String descripcion, boolean hecho) {
+    public Actividad(int id, String titulo, String descripcion, boolean hecho) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;

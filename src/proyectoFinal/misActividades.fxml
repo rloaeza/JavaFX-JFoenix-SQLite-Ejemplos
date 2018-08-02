@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 
-<AnchorPane prefHeight="631.0" prefWidth="550.0" style="-fx-background-color: TRANSPARENT;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectoFinal.TODO">
+<AnchorPane prefHeight="631.0" prefWidth="550.0" style="-fx-background-color: TRANSPARENT;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectoFinal.misActividades">
    <children>
       <AnchorPane layoutX="14.0" layoutY="42.0" prefHeight="175.0" prefWidth="509.0" style="-fx-background-color: #f4d742;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
          <children>
@@ -23,22 +23,22 @@
             <JFXCheckBox fx:id="hecho" layoutX="401.0" layoutY="157.0" text="Hecho" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="20.0" />
          </children>
       </AnchorPane>
-      <TilePane fx:id="activas" layoutX="20.0" layoutY="240.0" prefHeight="371.0" prefWidth="509.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0" />
+      <TilePane fx:id="listaActividades" layoutX="20.0" layoutY="240.0" prefHeight="371.0" prefWidth="509.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0" />
       <HBox alignment="CENTER" layoutX="405.0" layoutY="9.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="41.0" prefWidth="86.0" style="-fx-background-color: #f4d742;" AnchorPane.rightAnchor="20.0">
          <children>
             <ImageView fitHeight="33.0" fitWidth="39.0" onMouseClicked="#Salir" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@salir.png" />
+                  <Image url="@imagenes/salir.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="41.0" fitWidth="42.0" onMouseClicked="#LimpiarHechos" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@limpiar.png" />
+                  <Image url="@imagenes/limpiar.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="41.0" fitWidth="42.0" onMouseClicked="#NuevaNota" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@nuevo.png" />
+                  <Image url="@imagenes/nuevo.png" />
                </image>
             </ImageView>
          </children>

@@ -20,8 +20,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -30,21 +28,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class TODO extends Application implements Initializable {
+public class misActividades extends Application implements Initializable {
 
-    private ArrayList<TODOModel> todoModels;
+    private ArrayList<Actividad> actividades;
 
     private boolean editandoNota;
     private int indice;
     private int id;
 
-    private Connection connection;
-    private Statement statement;
-
     private ResultSet resultSet;
 
     @FXML
-    private TilePane activas;
+    private TilePane listaActividades;
 
     @FXML
     private JFXCheckBox hecho;
@@ -67,11 +62,11 @@ public class TODO extends Application implements Initializable {
     @FXML
     void LimpiarHechos(MouseEvent event) {
         try {
-            EjecutarSQL("DELETE FROM Actividades WHERE hecho=1");
-            for(int i=todoModels.size()-1; i>=0; i--) {
-                if(todoModels.get(i).isHecho()) {
-                    todoModels.remove(i);
-                    activas.getChildren().remove(i);
+            EjecutarSQL("DELETE FROM Actividad WHERE hecho=1");
+            for(int i = actividades.size()-1; i>=0; i--) {
+                if(actividades.get(i).isHecho()) {
+                    actividades.remove(i);
+                    listaActividades.getChildren().remove(i);
                 }
             }
         } catch (SQLException e) {
@@ -91,23 +86,23 @@ public class TODO extends Application implements Initializable {
     void NuevoEditar(ActionEvent event) throws SQLException {
         GridPane nuevo = crearNota(titulo.getText(), descripcion.getText(), hecho.isSelected());
         if( editandoNota) {
-            todoModels.get(indice).setTitulo(titulo.getText());
-            todoModels.get(indice).setDescripcion(descripcion.getText());
-            todoModels.get(indice).setHecho(hecho.isSelected());
-            activas.getChildren().set(indice, nuevo);
-            EjecutarSQL("UPDATE Actividades SET " +
+            actividades.get(indice).setTitulo(titulo.getText());
+            actividades.get(indice).setDescripcion(descripcion.getText());
+            actividades.get(indice).setHecho(hecho.isSelected());
+            listaActividades.getChildren().set(indice, nuevo);
+            EjecutarSQL("UPDATE Actividad SET " +
                     "titulo='"+ titulo.getText() +"', " +
                     "descripcion='" + descripcion.getText()+"', " +
                     "hecho="+hecho.isSelected()+
-                    " WHERE idActividad="+todoModels.get(indice).getId()
+                    " WHERE idActividad="+ actividades.get(indice).getId()
             );
 
 
         }
         else {
-            todoModels.add(new TODOModel(id, titulo.getText(), descripcion.getText(), hecho.isSelected()));
-            activas.getChildren().add(nuevo);
-            EjecutarSQL("INSERT INTO Actividades (titulo, descripcion, hecho) VALUES " +
+            actividades.add(new Actividad(id, titulo.getText(), descripcion.getText(), hecho.isSelected()));
+            listaActividades.getChildren().add(nuevo);
+            EjecutarSQL("INSERT INTO Actividad (titulo, descripcion, hecho) VALUES " +
                     "('"+ titulo.getText() +"', " +
                     "'" + descripcion.getText()+"', " +
                     hecho.isSelected()+")");
@@ -151,9 +146,9 @@ public class TODO extends Application implements Initializable {
 
         nuevo.setOnMouseClicked(e -> {
             indice = buscame((GridPane) e.getSource());
-            this.titulo.setText(todoModels.get(indice).getTitulo());
-            this.descripcion.setText(todoModels.get(indice).getDescripcion());
-            this.hecho.setSelected(todoModels.get(indice).isHecho());
+            this.titulo.setText(actividades.get(indice).getTitulo());
+            this.descripcion.setText(actividades.get(indice).getDescripcion());
+            this.hecho.setSelected(actividades.get(indice).isHecho());
             this.editandoNota = true;
             this.NuevoEditar.setText("Actualizar");
 
@@ -164,7 +159,7 @@ public class TODO extends Application implements Initializable {
 
     private int buscame(GridPane gridPane) {
         int i=0;
-        for(Node g : activas.getChildren()) {
+        for(Node g : listaActividades.getChildren()) {
             if( gridPane== g) {
                 return i;
             }
@@ -176,7 +171,7 @@ public class TODO extends Application implements Initializable {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent layout = FXMLLoader.load(getClass().getResource("TODO.fxml"));
+        Parent layout = FXMLLoader.load(getClass().getResource("misActividades.fxml"));
         Scene scene = new Scene(layout);
         scene.setFill(Color.TRANSPARENT);
 
@@ -213,22 +208,22 @@ public class TODO extends Application implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        activas.setHgap(10);
-        activas.setVgap(10);
-        todoModels = new ArrayList<>();
+        listaActividades.setHgap(10);
+        listaActividades.setVgap(10);
+        actividades = new ArrayList<>();
         editandoNota = false;
 
         try {
-            resultSet = ConsultarSQL("SELECT * FROM Actividades");
-            todoModels.clear();
+            resultSet = ConsultarSQL("SELECT * FROM Actividad");
+            actividades.clear();
             while(resultSet.next()) {
-                todoModels.add(new TODOModel(
+                actividades.add(new Actividad(
                         resultSet.getInt("idActividad"),
                         resultSet.getString("titulo"),
                         resultSet.getString("descripcion"),
                         resultSet.getBoolean("hecho")
                         ));
-                activas.getChildren().add(crearNota(
+                listaActividades.getChildren().add(crearNota(
                         resultSet.getString("titulo"),
                         resultSet.getString("descripcion"),
                         resultSet.getBoolean("hecho")
