@@ -62,7 +62,7 @@ public class misActividades extends Application implements Initializable {
     @FXML
     void LimpiarHechos(MouseEvent event) {
         try {
-            EjecutarSQL("DELETE FROM Actividad WHERE hecho=1");
+            EjecutarSQL("DELETE FROM Actividades WHERE hecho=1");
             for(int i = actividades.size()-1; i>=0; i--) {
                 if(actividades.get(i).isHecho()) {
                     actividades.remove(i);
@@ -90,7 +90,7 @@ public class misActividades extends Application implements Initializable {
             actividades.get(indice).setDescripcion(descripcion.getText());
             actividades.get(indice).setHecho(hecho.isSelected());
             listaActividades.getChildren().set(indice, nuevo);
-            EjecutarSQL("UPDATE Actividad SET " +
+            EjecutarSQL("UPDATE Actividades SET " +
                     "titulo='"+ titulo.getText() +"', " +
                     "descripcion='" + descripcion.getText()+"', " +
                     "hecho="+hecho.isSelected()+
@@ -102,7 +102,7 @@ public class misActividades extends Application implements Initializable {
         else {
             actividades.add(new Actividad(id, titulo.getText(), descripcion.getText(), hecho.isSelected()));
             listaActividades.getChildren().add(nuevo);
-            EjecutarSQL("INSERT INTO Actividad (titulo, descripcion, hecho) VALUES " +
+            EjecutarSQL("INSERT INTO Actividades (titulo, descripcion, hecho) VALUES " +
                     "('"+ titulo.getText() +"', " +
                     "'" + descripcion.getText()+"', " +
                     hecho.isSelected()+")");
@@ -214,7 +214,7 @@ public class misActividades extends Application implements Initializable {
         editandoNota = false;
 
         try {
-            resultSet = ConsultarSQL("SELECT * FROM Actividad");
+            resultSet = ConsultarSQL("SELECT * FROM Actividades");
             actividades.clear();
             while(resultSet.next()) {
                 actividades.add(new Actividad(
@@ -223,6 +223,7 @@ public class misActividades extends Application implements Initializable {
                         resultSet.getString("descripcion"),
                         resultSet.getBoolean("hecho")
                         ));
+
                 listaActividades.getChildren().add(crearNota(
                         resultSet.getString("titulo"),
                         resultSet.getString("descripcion"),
